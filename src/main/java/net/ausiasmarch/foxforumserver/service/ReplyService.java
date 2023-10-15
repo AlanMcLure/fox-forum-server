@@ -1,12 +1,13 @@
 package net.ausiasmarch.foxforumserver.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.ausiasmarch.foxforumserver.entity.ReplyEntity;
+import net.ausiasmarch.foxforumserver.entity.ThreadEntity;
+import net.ausiasmarch.foxforumserver.entity.UserEntity;
 import net.ausiasmarch.foxforumserver.exception.ResourceNotFoundException;
 import net.ausiasmarch.foxforumserver.repository.ReplyRepository;
 
@@ -29,7 +30,7 @@ public class ReplyService {
     }
 
     public Long delete(Long id) {
-        oReplyRepository.deleteById(id);        
+        oReplyRepository.deleteById(id);
         return id;
     }
 

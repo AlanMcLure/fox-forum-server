@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "thread")
@@ -18,6 +19,7 @@ public class ThreadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String title;
 
     @ManyToOne
@@ -38,6 +40,11 @@ public class ThreadEntity {
 
     public ThreadEntity(String title) {
         this.title = title;
+    }
+
+    public ThreadEntity(String title, UserEntity user) {
+        this.title = title;
+        this.user = user;
     }
 
     public Long getId() {

@@ -7,16 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "reply")
 public class ReplyEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @NotBlank
     String title;
+    @NotBlank
     String body;
 
     @ManyToOne
@@ -40,21 +43,34 @@ public class ReplyEntity {
         this.title = title;
         this.body = body;
     }
+
+    public ReplyEntity(String title, String body, UserEntity user, ThreadEntity thread) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.thread = thread;
+    }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getBody() {
         return body;
     }
+
     public void setBody(String body) {
         this.body = body;
     }
@@ -75,6 +91,4 @@ public class ReplyEntity {
         this.thread = thread;
     }
 
-    
-    
 }

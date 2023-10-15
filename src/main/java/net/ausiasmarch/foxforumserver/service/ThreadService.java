@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.ausiasmarch.foxforumserver.entity.ThreadEntity;
+import net.ausiasmarch.foxforumserver.entity.UserEntity;
 import net.ausiasmarch.foxforumserver.exception.ResourceNotFoundException;
 import net.ausiasmarch.foxforumserver.repository.ThreadRepository;
 
@@ -28,7 +29,7 @@ public class ThreadService {
     }
 
     public Long delete(Long id) {
-        oThreadRepository.deleteById(id);        
+        oThreadRepository.deleteById(id);
         return id;
     }
 
@@ -36,9 +37,9 @@ public class ThreadService {
         return oThreadRepository.findAll(oPageable);
     }
 
-    public Long populate(Integer amount) {
+    public Long populate(Integer amount, UserEntity user) {
         for (int i = 0; i < amount; i++) {
-            oThreadRepository.save(new ThreadEntity("title" + i));
+            oThreadRepository.save(new ThreadEntity("title" + i, user));
         }
         return oThreadRepository.count();
     }

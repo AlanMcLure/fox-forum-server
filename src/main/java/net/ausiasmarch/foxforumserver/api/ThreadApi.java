@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.ausiasmarch.foxforumserver.entity.ThreadEntity;
+import net.ausiasmarch.foxforumserver.entity.UserEntity;
 import net.ausiasmarch.foxforumserver.service.ThreadService;
 
 @RestController
@@ -48,7 +49,7 @@ public class ThreadApi {
     }
 
     @PostMapping("/populate/{amount}")
-    public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount) {
-        return ResponseEntity.ok(oThreadService.populate(amount));
+    public ResponseEntity<Long> populate(@PathVariable("amount") Integer amount, UserEntity user) {
+        return ResponseEntity.ok(oThreadService.populate(amount, user));
     }
 }
