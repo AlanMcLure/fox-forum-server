@@ -11,6 +11,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "thread")
@@ -19,7 +21,10 @@ public class ThreadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     @NotBlank
+    @Size(max = 2048)
     private String title;
 
     @ManyToOne
@@ -40,11 +45,6 @@ public class ThreadEntity {
 
     public ThreadEntity(String title) {
         this.title = title;
-    }
-
-    public ThreadEntity(String title, UserEntity user) {
-        this.title = title;
-        this.user = user;
     }
 
     public Long getId() {

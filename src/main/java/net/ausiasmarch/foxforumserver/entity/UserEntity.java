@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -24,16 +26,30 @@ public class UserEntity {
     private Long id;
 
     @NotNull
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String name;
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String surname;
+    @Size(max = 255)
     private String lastname;
     @Email
     private String email;
+    @NotNull
     @NotBlank
+    @Size(min = 6, max = 255)
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must be alphanumeric")
     private String username;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
+    @NotBlank
+    @Size(min = 64, max = 64)
+    @Pattern(regexp = "^[a-fA-F0-9]+$", message = "Password must be hexadecimal")
     private String password = "e2cac5c5f7e52ab03441bb70e89726ddbd1f6e5b683dde05fb65e0720290179e";
-    private Boolean role;
+    private Boolean role = false;
 
     @OneToMany(mappedBy = "user", fetch = jakarta.persistence.FetchType.LAZY)
     private List<ThreadEntity> threads;
